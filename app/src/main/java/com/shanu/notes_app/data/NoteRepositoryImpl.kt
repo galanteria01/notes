@@ -1,6 +1,7 @@
 package com.shanu.notes_app.data
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class NoteRepositoryImpl(private val dao: NoteDao): NoteRepository {
 
@@ -18,6 +19,14 @@ class NoteRepositoryImpl(private val dao: NoteDao): NoteRepository {
 
     override fun getNotes(): Flow<List<Note>> {
         return dao.getNotes()
+    }
+
+    override fun searchNotes(search: String): Flow<List<Note>> {
+        return dao.getNotes().map {
+            it.filter {
+                item -> item.title.contains(search)
+            }
+        }
     }
 
 }

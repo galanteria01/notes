@@ -5,7 +5,7 @@ import com.shanu.notes_app.data.Note
 sealed class NoteListEvent {
     data class OnDeleteNoteClick(val note: Note): NoteListEvent()
     data class OnDoneChange(val note: Note, val isDone: Boolean): NoteListEvent()
-    object OnUndoDeleteClick: NoteListEvent()
     data class OnNoteClick(val note: Note): NoteListEvent()
+    object OnUndoDeleteClick: NoteListEvent()
     object OnAddNoteClick: NoteListEvent()
 }

@@ -12,4 +12,6 @@ interface NoteRepository {
 
     fun getNotes(): Flow<List<Note>>
 
+    fun searchNotes(search: String): Flow<List<Note>>
+
 }

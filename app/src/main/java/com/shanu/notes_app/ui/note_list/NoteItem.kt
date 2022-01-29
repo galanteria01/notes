@@ -1,6 +1,7 @@
 package com.shanu.notes_app.ui.note_list
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material.IconButton
@@ -22,46 +23,54 @@ fun NoteItem(
     note: Note,
     onEvent: (NoteListEvent) -> Unit,
     modifier: Modifier = Modifier
-)
-{
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
-
-    )
-    {
-        Column (
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.Center
-                )
+) {
+    Card(
+        modifier = Modifier.padding(8.dp)
+    ) {
+        Row(
+            modifier = modifier,
+            verticalAlignment = Alignment.CenterVertically
+        )
         {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.Center
             )
             {
-                Text(
-                    text = note.title,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                {
+                    Text(
+                        text = note.title,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                }
+                note.content?.let { content ->
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = if(content.length > 50) content.slice(1..50).plus("...") else content
+                    )
+                }
+
+            }
+            Row() {
                 IconButton(onClick = {
                     onEvent(NoteListEvent.OnDeleteNoteClick(note))
                 }) {
-                    Icon(imageVector = Icons.Default.Delete , contentDescription = "Delete")
+                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
                 }
-            }
-            note.content?.let{ content ->
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(text = content)
+                Checkbox(
+                    checked = note.isDone,
+                    onCheckedChange = { isChecked ->
+                        onEvent(NoteListEvent.OnDoneChange(note, isChecked))
+                    }
+                )
             }
 
         }
-        Checkbox(
-            checked = note.isDone,
-            onCheckedChange = {isChecked ->
-                onEvent(NoteListEvent.OnDoneChange(note,isChecked))
-            }
-        )
     }
 }
