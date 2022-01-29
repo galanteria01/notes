@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
@@ -23,8 +24,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.airbnb.lottie.compose.*
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.shanu.notes_app.R
 import com.shanu.notes_app.util.UiEvent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -39,6 +42,26 @@ fun NoteListScreen(
     val scaffoldState = rememberScaffoldState()
     var isRefreshing by remember { mutableStateOf(false) }
     val swipeRefreshState = rememberSwipeRefreshState(isRefreshing)
+
+    val isPlaying by remember {
+        mutableStateOf(true)
+    }
+    val speed by remember {
+        mutableStateOf(1f)
+    }
+
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec
+            .RawRes(R.raw.empty)
+    )
+
+    val progress by animateLottieCompositionAsState(
+        composition,
+        iterations = LottieConstants.IterateForever,
+        isPlaying = isPlaying,
+        speed = speed,
+        restartOnPlay = false
+    )
     
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect{ event ->
@@ -99,24 +122,32 @@ fun NoteListScreen(
                     )
         }
     ) {
-        SwipeRefresh(state = swipeRefreshState, onRefresh = { isRefreshing = true }) {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            )
-            {
-                items(notes.value) { note ->
-                    NoteItem(
-                        note = note,
-                        onEvent = viewModel::onEvent,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                viewModel.onEvent(NoteListEvent.OnNoteClick(note))
-                            }
-                            .padding(16.dp)
-                    )
+        if(notes.value.isNotEmpty()) {
+            SwipeRefresh(state = swipeRefreshState, onRefresh = { isRefreshing = true }) {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                )
+                {
+                    items(notes.value) { note ->
+                        NoteItem(
+                            note = note,
+                            onEvent = viewModel::onEvent,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    viewModel.onEvent(NoteListEvent.OnNoteClick(note))
+                                }
+                                .padding(16.dp)
+                        )
+                    }
                 }
+            }
+        } else {
+                LottieAnimation(
+                    composition,
+                    progress,
+                    modifier = Modifier.size(400.dp)
+                )
             }
         }
     }
-}
