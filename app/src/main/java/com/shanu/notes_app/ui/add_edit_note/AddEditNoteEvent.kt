@@ -4,4 +4,5 @@ sealed class AddEditNoteEvent {
     data class OnTitleChange(val title: String): AddEditNoteEvent()
     data class OnContentChange(val content: String): AddEditNoteEvent()
     object OnSaveNoteClick: AddEditNoteEvent()
+    object OnBackClick: AddEditNoteEvent()
 }

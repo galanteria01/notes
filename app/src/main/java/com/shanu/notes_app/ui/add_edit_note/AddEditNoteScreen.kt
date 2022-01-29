@@ -4,11 +4,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.shanu.notes_app.util.UiEvent
 import kotlinx.coroutines.flow.collect
@@ -35,11 +41,30 @@ fun AddEditNoteScreen(
             }
         }
     }
+
     Scaffold (
         scaffoldState = scaffoldState,
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .fillMaxSize(),
+        topBar = {
+            CenterAlignedTopAppBar (
+                title = {
+                    androidx.compose.material3.Text(
+                        "Edit Note",
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 20.sp
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { viewModel.onEvent(AddEditNoteEvent.OnBackClick) }) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Go Back"
+                        )
+                    }
+                }
+            )
+        },
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 onClick = {
@@ -55,11 +80,13 @@ fun AddEditNoteScreen(
         }
     ){
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
-            TextField(
+            OutlinedTextField(
                 value = viewModel.title,
-                placeholder = {
+                label = {
                     Text("Title")
                 },
                 onValueChange = {
@@ -68,17 +95,21 @@ fun AddEditNoteScreen(
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(8.dp))
-            TextField(
+            OutlinedTextField(
                 value = viewModel.content,
                 onValueChange = {
                     viewModel.onEvent(AddEditNoteEvent.OnContentChange(it))
                 },
-                placeholder = {
+                label = {
                     Text("Content")
                 },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(bottom = 60.dp),
                 singleLine = false,
-                maxLines = 5
+                maxLines = 5,
+
             )
         }
     }

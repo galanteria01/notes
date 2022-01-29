@@ -1,10 +1,7 @@
 package com.shanu.notes_app.ui.note_list
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
@@ -106,11 +103,13 @@ fun NoteListScreen(
         },
         topBar = {
             CenterAlignedTopAppBar (
-                title = { Text(
+                title = {
+                    Text(
                     "Notes",
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp
-                ) },
+                )
+                        },
                 actions = {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(
@@ -146,7 +145,7 @@ fun NoteListScreen(
                 LottieAnimation(
                     composition,
                     progress,
-                    modifier = Modifier.size(400.dp)
+                    modifier = Modifier.size(400.dp).offset(y = 100.dp)
                 )
             }
         }

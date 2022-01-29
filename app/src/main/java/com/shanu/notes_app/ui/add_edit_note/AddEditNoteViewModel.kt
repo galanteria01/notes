@@ -75,6 +75,9 @@ class AddEditNoteViewModel @Inject constructor(
                     sendUiEvent(UiEvent.PopBackStack)
                 }
             }
+            is AddEditNoteEvent.OnBackClick -> {
+                sendUiEvent(UiEvent.PopBackStack)
+            }
         }
     }
 
