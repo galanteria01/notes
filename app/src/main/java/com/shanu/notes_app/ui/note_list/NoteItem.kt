@@ -2,16 +2,14 @@ package com.shanu.notes_app.ui.note_list
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -44,7 +42,10 @@ fun NoteItem(
                     Text(
                         text = note.title,
                         fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        style = TextStyle(
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
                     )
                     Spacer(modifier = Modifier.width(8.dp))
 
@@ -52,7 +53,10 @@ fun NoteItem(
                 note.content?.let { content ->
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = if(content.length > 50) content.slice(1..50).plus("...") else content
+                        text = if(content.length > 50) content.slice(1..50).plus("...") else content,
+                        style = TextStyle(
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
                     )
                 }
 
@@ -61,7 +65,7 @@ fun NoteItem(
                 IconButton(onClick = {
                     onEvent(NoteListEvent.OnDeleteNoteClick(note))
                 }) {
-                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
+                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete",)
                 }
                 Checkbox(
                     checked = note.isDone,
