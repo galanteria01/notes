@@ -8,4 +8,5 @@ sealed class NoteListEvent {
     data class OnNoteClick(val note: Note): NoteListEvent()
     object OnUndoDeleteClick: NoteListEvent()
     object OnAddNoteClick: NoteListEvent()
+    object OnSearchClicked: NoteListEvent()
 }

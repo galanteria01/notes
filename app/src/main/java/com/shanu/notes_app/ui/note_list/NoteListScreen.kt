@@ -111,7 +111,9 @@ fun NoteListScreen(
                 )
                         },
                 actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {
+                        viewModel.onEvent(NoteListEvent.OnSearchClicked)
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.Search,
                             contentDescription = "Search"
@@ -145,7 +147,9 @@ fun NoteListScreen(
                 LottieAnimation(
                     composition,
                     progress,
-                    modifier = Modifier.size(400.dp).offset(y = 100.dp)
+                    modifier = Modifier
+                        .size(400.dp)
+                        .offset(y = 100.dp)
                 )
             }
         }

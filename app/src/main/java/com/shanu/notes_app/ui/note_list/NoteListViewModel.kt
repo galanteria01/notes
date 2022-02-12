@@ -58,6 +58,9 @@ class NoteListViewModel @Inject constructor(
                     )
                 }
             }
+            is NoteListEvent.OnSearchClicked -> {
+                sendUiEvent(UiEvent.Navigate(Routes.SEARCH_NOTE))
+            }
         }
     }
 

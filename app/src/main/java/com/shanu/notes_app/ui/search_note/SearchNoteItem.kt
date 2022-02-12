@@ -1,4 +1,4 @@
-package com.shanu.notes_app.ui.note_list
+package com.shanu.notes_app.ui.search_note
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
@@ -17,10 +17,11 @@ import com.shanu.notes_app.data.Note
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteItem(
-    note: Note,
-    onEvent: (NoteListEvent) -> Unit,
-    modifier: Modifier = Modifier
+fun SearchNoteItem(
+    modifier: Modifier = Modifier,
+    note:Note,
+    onEvent: (SearchNoteEvent) -> Unit
+
 ) {
     Card(
         modifier = Modifier.padding(8.dp)
@@ -57,14 +58,14 @@ fun NoteItem(
             }
             Row() {
                 IconButton(onClick = {
-                    onEvent(NoteListEvent.OnDeleteNoteClick(note))
+                    onEvent(SearchNoteEvent.OnDeleteNoteClick(note))
                 }) {
                     Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete",)
                 }
                 Checkbox(
                     checked = note.isDone,
                     onCheckedChange = { isChecked ->
-                        onEvent(NoteListEvent.OnDoneChange(note, isChecked))
+                        onEvent(SearchNoteEvent.OnDoneChange(note, isChecked))
                     }
                 )
             }
