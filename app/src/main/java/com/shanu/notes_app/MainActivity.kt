@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.shanu.notes_app.ui.add_edit_note.AddEditNoteScreen
+import com.shanu.notes_app.ui.app_info.AppInfoScreen
 import com.shanu.notes_app.ui.note_list.NoteListScreen
 import com.shanu.notes_app.ui.search_note.SearchNoteScreen
 import com.shanu.notes_app.ui.theme.NotesappTheme
@@ -55,6 +56,11 @@ class MainActivity : ComponentActivity() {
                             )
                         ) {
                             AddEditNoteScreen(onPopBackStack = { navController.popBackStack() })
+                        }
+                        composable(
+                            route = Routes.INFO
+                        ) {
+                            AppInfoScreen()
                         }
                     }
                 }

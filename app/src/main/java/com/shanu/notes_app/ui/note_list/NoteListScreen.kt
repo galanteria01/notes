@@ -8,8 +8,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarResult
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -87,20 +86,6 @@ fun NoteListScreen(
 
     Scaffold(
         scaffoldState = scaffoldState,
-        floatingActionButton = {
-            ExtendedFloatingActionButton(text = {
-                Text("Add Note")
-            },
-                icon = {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Add"
-                    )
-                },
-                onClick = {
-                viewModel.onEvent(NoteListEvent.OnAddNoteClick)
-            })
-        },
         topBar = {
             CenterAlignedTopAppBar (
                 title = {
@@ -120,7 +105,35 @@ fun NoteListScreen(
                         )
                     }
                 }
+            )
+        },
+        bottomBar = {
+            BottomAppBar(
+            icons = {
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(Icons.Filled.Info, contentDescription = "Localized description")
+                }
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(Icons.Filled.Check, contentDescription = "Localized description")
+                }
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(
+                        Icons.Filled.Edit,
+                        contentDescription = "Localized description",
                     )
+                }
+            },
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {
+                        viewModel.onEvent(NoteListEvent.OnAddNoteClick)
+                    },
+                    elevation = BottomAppBarDefaults.floatingActionButtonElevation()
+                ) {
+                    Icon(Icons.Filled.Add, "Localized description")
+                }
+            }
+        )
         }
     ) {
         if(notes.value.isNotEmpty()) {

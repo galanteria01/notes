@@ -1,6 +1,6 @@
 package com.shanu.notes_app.ui.note_list
 
-import com.shanu.notes_app.data.Note
+import com.shanu.notes_app.data.models.Note
 
 sealed class NoteListEvent {
     data class OnDeleteNoteClick(val note: Note): NoteListEvent()
@@ -9,4 +9,7 @@ sealed class NoteListEvent {
     object OnUndoDeleteClick: NoteListEvent()
     object OnAddNoteClick: NoteListEvent()
     object OnSearchClicked: NoteListEvent()
+    object OnEditClicked: NoteListEvent()
+    object OnSelectAllClicked: NoteListEvent()
+    object OnInfoClicked: NoteListEvent()
 }

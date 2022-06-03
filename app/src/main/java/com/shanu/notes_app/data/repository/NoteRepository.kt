@@ -1,5 +1,6 @@
-package com.shanu.notes_app.data
+package com.shanu.notes_app.data.repository
 
+import com.shanu.notes_app.data.models.Note
 import kotlinx.coroutines.flow.Flow
 
 interface NoteRepository {

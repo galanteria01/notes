@@ -5,9 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shanu.notes_app.data.Note
-import com.shanu.notes_app.data.NoteRepository
-import com.shanu.notes_app.ui.note_list.NoteListEvent
+import com.shanu.notes_app.data.models.Note
+import com.shanu.notes_app.data.repository.NoteRepository
 import com.shanu.notes_app.util.Routes
 import com.shanu.notes_app.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel

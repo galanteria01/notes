@@ -1,9 +1,8 @@
-package com.shanu.notes_app.data
+package com.shanu.notes_app.data.repository
 
-import androidx.compose.ui.text.toLowerCase
+import com.shanu.notes_app.data.database.NoteDao
+import com.shanu.notes_app.data.models.Note
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import java.util.*
 
 class NoteRepositoryImpl(private val dao: NoteDao): NoteRepository {
 

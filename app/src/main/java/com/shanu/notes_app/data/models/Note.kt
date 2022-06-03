@@ -1,4 +1,4 @@
-package com.shanu.notes_app.data
+package com.shanu.notes_app.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

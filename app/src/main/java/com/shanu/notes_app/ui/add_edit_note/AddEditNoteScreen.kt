@@ -1,24 +1,32 @@
 package com.shanu.notes_app.ui.add_edit_note
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.IconButton
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.*
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.shanu.notes_app.util.UiEvent
-import kotlinx.coroutines.flow.collect
 
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AddEditNoteScreen(
     onPopBackStack: () -> Unit,
@@ -62,6 +70,11 @@ fun AddEditNoteScreen(
                             contentDescription = "Go Back"
                         )
                     }
+                },
+                actions = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(imageVector = Icons.Default.Share, contentDescription = "Share Icon")
+                    }
                 }
             )
         },
@@ -84,18 +97,30 @@ fun AddEditNoteScreen(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            OutlinedTextField(
+            TextField(
                 value = viewModel.title,
+                singleLine = true,
                 label = {
                     Text("Title")
                 },
+                textStyle = TextStyle(
+                    fontSize = 24.sp
+                ),
                 onValueChange = {
                     viewModel.onEvent(AddEditNoteEvent.OnTitleChange(it))
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent
+                )
+
             )
             Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
+            TextField(
                 value = viewModel.content,
                 onValueChange = {
                     viewModel.onEvent(AddEditNoteEvent.OnContentChange(it))
@@ -109,7 +134,13 @@ fun AddEditNoteScreen(
                     .padding(bottom = 60.dp),
                 singleLine = false,
                 maxLines = 5,
-
+                shape = RoundedCornerShape(8.dp),
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent
+                )
             )
         }
     }

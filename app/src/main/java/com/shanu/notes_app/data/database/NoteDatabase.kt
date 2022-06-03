@@ -1,7 +1,9 @@
-package com.shanu.notes_app.data
+package com.shanu.notes_app.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.shanu.notes_app.data.database.NoteDao
+import com.shanu.notes_app.data.models.Note
 
 @Database(
     entities = [Note::class],

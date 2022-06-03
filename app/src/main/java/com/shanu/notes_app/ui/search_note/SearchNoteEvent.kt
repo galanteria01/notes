@@ -1,7 +1,6 @@
 package com.shanu.notes_app.ui.search_note
 
-import com.shanu.notes_app.data.Note
-import com.shanu.notes_app.ui.note_list.NoteListEvent
+import com.shanu.notes_app.data.models.Note
 
 sealed class SearchNoteEvent {
     data class OnDeleteNoteClick(val note: Note): SearchNoteEvent()

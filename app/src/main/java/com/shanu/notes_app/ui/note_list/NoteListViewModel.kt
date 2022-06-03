@@ -2,8 +2,8 @@ package com.shanu.notes_app.ui.note_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shanu.notes_app.data.Note
-import com.shanu.notes_app.data.NoteRepository
+import com.shanu.notes_app.data.models.Note
+import com.shanu.notes_app.data.repository.NoteRepository
 import com.shanu.notes_app.util.Routes
 import com.shanu.notes_app.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +22,7 @@ class NoteListViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    private var deletedNote: Note ?= null
+    private var deletedNote: Note?= null
 
     fun onEvent(event: NoteListEvent) {
         when(event) {

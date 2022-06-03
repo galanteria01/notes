@@ -1,6 +1,7 @@
-package com.shanu.notes_app.data
+package com.shanu.notes_app.data.database
 
 import androidx.room.*
+import com.shanu.notes_app.data.models.Note
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -9,7 +10,7 @@ interface NoteDao {
     suspend fun insertNote(note: Note)
 
     @Delete
-    suspend fun deleteNote(note:Note)
+    suspend fun deleteNote(note: Note)
 
     @Query("SELECT * FROM note WHERE id = :id")
     suspend fun getNoteById(id: Int): Note?

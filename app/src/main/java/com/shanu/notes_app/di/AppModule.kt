@@ -2,10 +2,9 @@ package com.shanu.notes_app.di
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.shanu.notes_app.data.NoteDatabase
-import com.shanu.notes_app.data.NoteRepository
-import com.shanu.notes_app.data.NoteRepositoryImpl
+import com.shanu.notes_app.data.database.NoteDatabase
+import com.shanu.notes_app.data.repository.NoteRepository
+import com.shanu.notes_app.data.repository.NoteRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
